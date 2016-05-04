@@ -6,7 +6,6 @@ import java.util.Map;
 import org.spincast.core.templating.ITemplatingEngine;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.inject.Inject;
 
 /**
@@ -20,10 +19,7 @@ public class Todo implements ITodo {
     private int order = 0;
     private String url;
 
-    @JsonIgnore
     private IAppConfig appConfig;
-
-    @JsonIgnore
     private ITemplatingEngine templatingEngine;
 
     /**
@@ -64,6 +60,10 @@ public class Todo implements ITodo {
     public String getUrl() {
 
         if(this.url == null) {
+
+            if(this.id == null) {
+                throw new RuntimeException("The Todo has to be saved first to have an id and an unique URL!");
+            }
 
             String urlTemplate = getAppConfig().getTodoUrlTemplate();
 
