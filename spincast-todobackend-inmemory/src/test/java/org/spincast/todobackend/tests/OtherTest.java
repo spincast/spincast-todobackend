@@ -1,22 +1,32 @@
 package org.spincast.todobackend.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.spincast.plugins.beanvalidation.IValidator;
+import org.spincast.plugins.beanvalidation.IValidatorFactory;
+import org.spincast.shaded.org.apache.commons.lang3.StringUtils;
 import org.spincast.todobackend.inmemory.config.AppConstants;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.Todo;
 import org.spincast.todobackend.inmemory.repositories.InMemoryTodoRepository;
 
+import com.google.inject.Inject;
+
 /**
  * Various tests.
  */
-public class OtherTest {
+public class OtherTest extends AppIntegrationTestBase {
+
+    @Inject
+    IValidatorFactory<ITodo> todoValidatorFactory;
 
     /**
      * Test repository.
@@ -75,6 +85,24 @@ public class OtherTest {
         addTodo = this.memoryTodoRepository.addTodo(new Todo());
         assertNotNull(addTodo);
         assertEquals(Integer.valueOf(1), addTodo.getId());
+    }
+
+    //==========================================
+    // Title's maximum length (255)
+    //==========================================
+    @Test
+    public void titleMaxLength() throws Exception {
+
+        ITodo todo = new Todo();
+        todo.setTitle(StringUtils.repeat("x", 255));
+
+        IValidator validator = this.todoValidatorFactory.create(todo);
+        assertTrue(validator.isValid());
+
+        todo.setTitle(StringUtils.repeat("x", 256));
+
+        validator.revalidate();
+        assertFalse(validator.isValid());
     }
 
 }
