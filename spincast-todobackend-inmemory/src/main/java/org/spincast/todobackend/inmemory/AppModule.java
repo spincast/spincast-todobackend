@@ -2,9 +2,9 @@ package org.spincast.todobackend.inmemory;
 
 import org.spincast.core.config.ISpincastConfig;
 import org.spincast.defaults.guice.SpincastDefaultGuiceModule;
-import org.spincast.plugins.beanvalidation.IValidator;
-import org.spincast.plugins.beanvalidation.IValidatorFactory;
-import org.spincast.plugins.beanvalidation.SpincastBeanValidationPluginGuiceModule;
+import org.spincast.plugins.validation.IValidator;
+import org.spincast.plugins.validation.IValidatorFactory;
+import org.spincast.plugins.validation.SpincastBeanValidationPluginGuiceModule;
 import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
 import org.spincast.todobackend.inmemory.controllers.ITodoController;

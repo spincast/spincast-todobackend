@@ -9,9 +9,9 @@ import java.util.Objects;
 
 import org.spincast.core.exceptions.PublicException;
 import org.spincast.core.json.IJsonObject;
-import org.spincast.plugins.beanvalidation.FormattedType;
-import org.spincast.plugins.beanvalidation.IValidator;
-import org.spincast.plugins.beanvalidation.IValidatorFactory;
+import org.spincast.plugins.validation.FormattedType;
+import org.spincast.plugins.validation.IValidator;
+import org.spincast.plugins.validation.IValidatorFactory;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.repositories.ITodoRepository;
 

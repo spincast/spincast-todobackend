@@ -10,8 +10,8 @@ import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.spincast.plugins.beanvalidation.IValidator;
-import org.spincast.plugins.beanvalidation.IValidatorFactory;
+import org.spincast.plugins.validation.IValidator;
+import org.spincast.plugins.validation.IValidatorFactory;
 import org.spincast.shaded.org.apache.commons.lang3.StringUtils;
 import org.spincast.todobackend.inmemory.config.AppConstants;
 import org.spincast.todobackend.inmemory.models.ITodo;

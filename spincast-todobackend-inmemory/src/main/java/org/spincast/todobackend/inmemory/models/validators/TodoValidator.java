@@ -2,9 +2,9 @@ package org.spincast.todobackend.inmemory.models.validators;
 
 import org.spincast.core.json.IJsonManager;
 import org.spincast.core.xml.IXmlManager;
-import org.spincast.plugins.beanvalidation.ISpincastBeanValidationConfig;
-import org.spincast.plugins.beanvalidation.IValidationErrorFactory;
-import org.spincast.plugins.beanvalidation.SpincastValidatorBase;
+import org.spincast.plugins.validation.ISpincastBeanValidationConfig;
+import org.spincast.plugins.validation.IValidationErrorFactory;
+import org.spincast.plugins.validation.SpincastValidatorBase;
 import org.spincast.todobackend.inmemory.models.ITodo;
 
 import com.google.inject.assistedinject.Assisted;
