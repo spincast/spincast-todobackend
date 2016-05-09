@@ -60,6 +60,7 @@ public class TodoService implements ITodoService {
      * Sorts the Todos by their order.
      */
     protected List<ITodo> sortTodosByOrder(Collection<ITodo> todos) {
+
         if(todos == null) {
             return null;
         }
@@ -81,6 +82,9 @@ public class TodoService implements ITodoService {
 
         Objects.requireNonNull(newTodo, "The Todo can't be NULL");
 
+        //==========================================
+        // Validates the Todo before saving it.
+        //==========================================
         validateTodo(newTodo);
 
         ITodo todo = getTodoRepository().addTodo(newTodo);
@@ -92,7 +96,7 @@ public class TodoService implements ITodoService {
     }
 
     /**
-     * Validates the Todo and throws an exception if something is
+     * Validates the Todo: throws an exception if something is
      * invalid.
      */
     protected void validateTodo(ITodo newTodo) {
