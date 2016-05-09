@@ -4,7 +4,7 @@ import org.spincast.core.config.ISpincastConfig;
 import org.spincast.defaults.guice.SpincastDefaultGuiceModule;
 import org.spincast.plugins.validation.IValidator;
 import org.spincast.plugins.validation.IValidatorFactory;
-import org.spincast.plugins.validation.SpincastBeanValidationPluginGuiceModule;
+import org.spincast.plugins.validation.SpincastValidationPluginGuiceModule;
 import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
 import org.spincast.todobackend.inmemory.controllers.ITodoController;
@@ -35,7 +35,7 @@ public class AppModule extends SpincastDefaultGuiceModule {
         //==========================================
         // Install the validation plugin's Guice module.
         //==========================================
-        install(new SpincastBeanValidationPluginGuiceModule(getRequestContextType()));
+        install(new SpincastValidationPluginGuiceModule(getRequestContextType()));
 
         //==========================================
         // One instance only of our configuration class.
