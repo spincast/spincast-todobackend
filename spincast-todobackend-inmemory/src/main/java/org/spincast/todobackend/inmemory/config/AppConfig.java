@@ -13,6 +13,10 @@ import com.google.inject.Inject;
 
 /**
  * Implementation of our application's configurations class.
+ * 
+ * We extend SpincastConfigPropsFileBased which is a class provided by the 
+ * "Spincast Properties File Config" plugin and which allows to define
+ * configurations in an external .properties file.
  */
 public class AppConfig extends SpincastConfigPropsFileBased implements IAppConfig {
 
