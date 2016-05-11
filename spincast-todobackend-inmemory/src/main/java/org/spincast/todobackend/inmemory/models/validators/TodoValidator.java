@@ -1,10 +1,7 @@
 package org.spincast.todobackend.inmemory.models.validators;
 
-import org.spincast.core.json.IJsonManager;
-import org.spincast.core.xml.IXmlManager;
-import org.spincast.plugins.validation.ISpincastValidationConfig;
-import org.spincast.plugins.validation.IValidationErrorFactory;
 import org.spincast.plugins.validation.SpincastValidatorBase;
+import org.spincast.plugins.validation.SpincastValidatorBaseDeps;
 import org.spincast.todobackend.inmemory.models.ITodo;
 
 import com.google.inject.assistedinject.Assisted;
@@ -16,12 +13,9 @@ import com.google.inject.assistedinject.AssistedInject;
 public class TodoValidator extends SpincastValidatorBase<ITodo> {
 
     @AssistedInject
-    public TodoValidator(@Assisted ITodo objToValidate,
-                         IValidationErrorFactory validationErrorFactory,
-                         ISpincastValidationConfig spincastValidationConfig,
-                         IJsonManager jsonManager,
-                         IXmlManager xmlManager) {
-        super(objToValidate, validationErrorFactory, spincastValidationConfig, jsonManager, xmlManager);
+    public TodoValidator(@Assisted ITodo todo,
+                         SpincastValidatorBaseDeps spincastValidatorBaseDeps) {
+        super(todo, spincastValidatorBaseDeps);
     }
 
     @Override
