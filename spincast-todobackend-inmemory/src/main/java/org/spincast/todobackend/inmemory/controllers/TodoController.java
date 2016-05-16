@@ -45,7 +45,7 @@ public class TodoController implements ITodoController {
     public void getTodosHandler(IDefaultRequestContext context) {
 
         List<ITodo> todos = getTodoService().getAllTodos();
-        context.response().sendJson(todos);
+        context.response().sendJsonObj(todos);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class TodoController implements ITodoController {
         if(newTodo != null) {
             newTodo = getTodoService().addTodo(newTodo);
         }
-        context.response().sendJson(newTodo);
+        context.response().sendJsonObj(newTodo);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class TodoController implements ITodoController {
             throw new NotFoundException();
         }
 
-        context.response().sendJson(todo);
+        context.response().sendJsonObj(todo);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class TodoController implements ITodoController {
 
         todo = getTodoService().patchTodo(todo, jsonPatch);
 
-        context.response().sendJson(todo);
+        context.response().sendJsonObj(todo);
     }
 
     @Override
