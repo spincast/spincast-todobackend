@@ -35,7 +35,7 @@ public class AppModule extends SpincastDefaultGuiceModule {
         //==========================================
         // Install the validation plugin's Guice module.
         //==========================================
-        install(new SpincastValidationPluginGuiceModule(getRequestContextType()));
+        install(new SpincastValidationPluginGuiceModule(getRequestContextType(), getWebsocketContextType()));
 
         //==========================================
         // One instance only of our configuration class.
