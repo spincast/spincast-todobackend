@@ -8,6 +8,7 @@ import org.spincast.core.json.IJsonArray;
 import org.spincast.core.json.IJsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
+import org.spincast.core.websocket.IDefaultWebsocketContext;
 import org.spincast.plugins.httpclient.IHttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
 import org.spincast.testing.core.SpincastIntegrationTestBase;
@@ -20,7 +21,8 @@ import com.google.inject.Injector;
  * Integration test base class specifically made for 
  * our application.
  */
-public abstract class AppIntegrationTestBase extends SpincastIntegrationTestBase<IDefaultRequestContext> {
+public abstract class AppIntegrationTestBase extends
+                                             SpincastIntegrationTestBase<IDefaultRequestContext, IDefaultWebsocketContext> {
 
     @Inject
     protected IJsonManager jsonManager;
@@ -31,7 +33,18 @@ public abstract class AppIntegrationTestBase extends SpincastIntegrationTestBase
      */
     @Override
     protected Injector createInjector() {
-        return App.createApp(null, null);
+
+        //==========================================
+        // Make sure you add the Guice Module returned by
+        // getTestOverridingModule(...) as an overriding Module!
+        // You can also modify it, before adding it.
+        //==========================================
+        return App.createApp(getMainArgs(),
+                             getTestOverridingModule(IDefaultRequestContext.class, IDefaultWebsocketContext.class));
+    }
+
+    protected String[] getMainArgs() {
+        return null;
     }
 
     @Override
