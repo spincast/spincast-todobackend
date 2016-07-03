@@ -33,14 +33,8 @@ public abstract class AppIntegrationTestBase extends
      */
     @Override
     protected Injector createInjector() {
-
-        //==========================================
-        // Make sure you add the Guice Module returned by
-        // getTestOverridingModule(...) as an overriding Module!
-        // You can also modify it, before adding it.
-        //==========================================
         return App.createApp(getMainArgs(),
-                             getTestOverridingModule(IDefaultRequestContext.class, IDefaultWebsocketContext.class));
+                             getDefaultOverridingModule(IDefaultRequestContext.class, IDefaultWebsocketContext.class));
     }
 
     protected String[] getMainArgs() {
