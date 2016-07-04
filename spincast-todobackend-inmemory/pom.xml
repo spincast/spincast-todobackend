@@ -4,9 +4,10 @@
 	
     <parent>
         <groupId>org.spincast</groupId>
-        <artifactId>spincast-parent</artifactId>
-        <version>0.9.20-SNAPSHOT</version>
+        <artifactId>spincast-parent-pom</artifactId>
+        <version>1.0.0</version>
     </parent>
+    
     <artifactId>spincast-todobackend-inmemory</artifactId>
     
     <name>${project.groupId}:${project.artifactId}</name>
@@ -14,9 +15,8 @@
     <url>https://todobackend-inmemory.spincast.org</url>
     
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <app.mainClass>org.spincast.todobackend.inmemory.App</app.mainClass>
+        <spincast.version>0.9.23-SNAPSHOT</spincast.version>
     </properties>
 
 	<dependencies>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.spincast</groupId>
             <artifactId>spincast-default</artifactId>
-            <version>${project.version}</version>
+            <version>${spincast.version}</version>
         </dependency>
         
         <!--=================================== 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.spincast</groupId>
             <artifactId>spincast-plugins-config-properties-file</artifactId>
-            <version>${project.version}</version>
+            <version>${spincast.version}</version>
         </dependency>
         
         <!--=================================== 
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.spincast</groupId>
             <artifactId>spincast-plugins-validation</artifactId>
-            <version>${project.version}</version>
+            <version>${spincast.version}</version>
         </dependency>
         
         <!--=================================== 
@@ -63,13 +63,14 @@
         <dependency>
             <groupId>org.spincast</groupId>
             <artifactId>spincast-testing-default</artifactId>
-            <version>${project.version}</version>
+            <version>${spincast.version}</version>
             <scope>test</scope>
         </dependency>
 
 	</dependencies>
 
 	<build>
+    
 		<pluginManagement>
 			<plugins>
 				<plugin>
