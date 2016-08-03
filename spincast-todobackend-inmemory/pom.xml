@@ -16,7 +16,7 @@
     
     <properties>
         <app.mainClass>org.spincast.todobackend.inmemory.App</app.mainClass>
-        <spincast.version>0.9.27-SNAPSHOT</spincast.version>
+        <spincast.version>0.9.28-SNAPSHOT</spincast.version>
     </properties>
 
 	<dependencies>
