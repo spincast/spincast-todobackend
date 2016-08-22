@@ -9,9 +9,9 @@ import java.util.Objects;
 
 import org.spincast.core.exceptions.PublicException;
 import org.spincast.core.json.IJsonObject;
-import org.spincast.plugins.validation.FormatType;
-import org.spincast.plugins.validation.IValidator;
-import org.spincast.plugins.validation.IValidatorFactory;
+import org.spincast.core.validation.FormatType;
+import org.spincast.core.validation.IValidationResult;
+import org.spincast.core.validation.IValidatorFactory;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.repositories.ITodoRepository;
 
@@ -101,7 +101,7 @@ public class TodoService implements ITodoService {
      */
     protected void validateTodo(ITodo newTodo) {
 
-        IValidator todoValidator = getTodoValidatorFactory().create(newTodo);
+        IValidationResult todoValidator = getTodoValidatorFactory().create(newTodo);
         if(!todoValidator.isValid()) {
 
             StringBuilder messageBuilder = new StringBuilder("The Todo to add is invalid.\nErrors:\n\n");

@@ -1,7 +1,7 @@
 package org.spincast.todobackend.inmemory.models.validators;
 
-import org.spincast.plugins.validation.SpincastValidatorBase;
-import org.spincast.plugins.validation.SpincastValidatorBaseDeps;
+import org.spincast.core.validation.SpincastValidatorBase;
+import org.spincast.core.validation.SpincastValidatorBaseDeps;
 import org.spincast.todobackend.inmemory.models.ITodo;
 
 import com.google.inject.assistedinject.Assisted;
@@ -24,7 +24,7 @@ public class TodoValidator extends SpincastValidatorBase<ITodo> {
         //==========================================
         // Maximum 255 character for the title
         //==========================================
-        validateMaxLength("title", getObjToValidate().getTitle(), 255);
+        validateMaxLength("title", getValidatedObject().getTitle(), 255);
 
     }
 

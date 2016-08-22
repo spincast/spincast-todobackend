@@ -1,10 +1,10 @@
 package org.spincast.todobackend.inmemory;
 
 import org.spincast.core.config.ISpincastConfig;
+import org.spincast.core.validation.IValidationResult;
+import org.spincast.core.validation.IValidatorFactory;
+import org.spincast.core.validation.SpincastValidationPluginGuiceModule;
 import org.spincast.defaults.guice.SpincastDefaultGuiceModule;
-import org.spincast.plugins.validation.IValidator;
-import org.spincast.plugins.validation.IValidatorFactory;
-import org.spincast.plugins.validation.SpincastValidationPluginGuiceModule;
 import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
 import org.spincast.todobackend.inmemory.controllers.ITodoController;
@@ -58,7 +58,7 @@ public class AppModule extends SpincastDefaultGuiceModule {
         //==========================================
         // Binds a Todo validator factory
         //==========================================
-        install(new FactoryModuleBuilder().implement(IValidator.class, TodoValidator.class)
+        install(new FactoryModuleBuilder().implement(IValidationResult.class, TodoValidator.class)
                                           .build(new TypeLiteral<IValidatorFactory<ITodo>>() {}));
 
         //==========================================
