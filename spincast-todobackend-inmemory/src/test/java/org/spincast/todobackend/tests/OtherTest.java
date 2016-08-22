@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 public class OtherTest extends AppIntegrationTestBase {
 
     @Inject
-    IValidatorFactory<ITodo> todoValidatorFactory;
+    protected IValidatorFactory<ITodo> todoValidatorFactory;
 
     /**
      * Test repository.
