@@ -40,15 +40,6 @@
         </dependency>
         
         <!--=================================== 
-        Spincast validation plugin
-        ====================================-->
-        <dependency>
-            <groupId>org.spincast</groupId>
-            <artifactId>spincast-plugins-validation</artifactId>
-            <version>${spincast.version}</version>
-        </dependency>
-        
-        <!--=================================== 
         Logback - Logging implementation.
         ====================================-->
         <dependency>
