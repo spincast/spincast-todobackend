@@ -1,24 +1,18 @@
 package org.spincast.todobackend.inmemory;
 
 import org.spincast.core.config.ISpincastConfig;
-import org.spincast.core.validation.IValidationResult;
-import org.spincast.core.validation.IValidatorFactory;
 import org.spincast.core.validation.SpincastValidationPluginGuiceModule;
 import org.spincast.defaults.guice.SpincastDefaultGuiceModule;
 import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
 import org.spincast.todobackend.inmemory.controllers.ITodoController;
 import org.spincast.todobackend.inmemory.controllers.TodoController;
-import org.spincast.todobackend.inmemory.models.ITodo;
-import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
 import org.spincast.todobackend.inmemory.repositories.ITodoRepository;
 import org.spincast.todobackend.inmemory.repositories.InMemoryTodoRepository;
 import org.spincast.todobackend.inmemory.services.ITodoService;
 import org.spincast.todobackend.inmemory.services.TodoService;
 
 import com.google.inject.Scopes;
-import com.google.inject.TypeLiteral;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 /**
  * The application's custom Guice module.
@@ -58,8 +52,8 @@ public class AppModule extends SpincastDefaultGuiceModule {
         //==========================================
         // Binds a Todo validator factory
         //==========================================
-        install(new FactoryModuleBuilder().implement(IValidationResult.class, TodoValidator.class)
-                                          .build(new TypeLiteral<IValidatorFactory<ITodo>>() {}));
+        //        install(new FactoryModuleBuilder().implement(IValidationResult.class, TodoValidator.class)
+        //                                          .build(new TypeLiteral<IValidatorFactory<ITodo>>() {}));
 
         //==========================================
         // Binds the App itself.

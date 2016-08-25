@@ -11,8 +11,9 @@ import org.spincast.core.exceptions.PublicException;
 import org.spincast.core.json.IJsonObject;
 import org.spincast.core.validation.FormatType;
 import org.spincast.core.validation.IValidationResult;
-import org.spincast.core.validation.IValidatorFactory;
+import org.spincast.core.validation.IValidator;
 import org.spincast.todobackend.inmemory.models.ITodo;
+import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
 import org.spincast.todobackend.inmemory.repositories.ITodoRepository;
 
 import com.google.inject.Inject;
@@ -23,24 +24,24 @@ import com.google.inject.Inject;
 public class TodoService implements ITodoService {
 
     private final ITodoRepository todoRepository;
-    private final IValidatorFactory<ITodo> todoValidatorFactory;
+    private final TodoValidator todoValidator;
 
     /**
      * Constructor
      */
     @Inject
     public TodoService(ITodoRepository todoRepository,
-                       IValidatorFactory<ITodo> todoValidatorFactory) {
+                       TodoValidator todoValidator) {
         this.todoRepository = todoRepository;
-        this.todoValidatorFactory = todoValidatorFactory;
+        this.todoValidator = todoValidator;
     }
 
     protected ITodoRepository getTodoRepository() {
         return this.todoRepository;
     }
 
-    protected IValidatorFactory<ITodo> getTodoValidatorFactory() {
-        return this.todoValidatorFactory;
+    protected IValidator<ITodo> getTodoValidator() {
+        return this.todoValidator;
     }
 
     @Override
@@ -101,12 +102,13 @@ public class TodoService implements ITodoService {
      */
     protected void validateTodo(ITodo newTodo) {
 
-        IValidationResult todoValidator = getTodoValidatorFactory().create(newTodo);
-        if(!todoValidator.isValid()) {
+        IValidationResult validationResult = getTodoValidator().validate(newTodo);
+
+        if(!validationResult.isValid()) {
 
             StringBuilder messageBuilder = new StringBuilder("The Todo to add is invalid.\nErrors:\n\n");
 
-            messageBuilder.append(todoValidator.getErrorsFormatted(FormatType.PLAIN_TEXT));
+            messageBuilder.append(validationResult.getErrorsFormatted(FormatType.PLAIN_TEXT));
 
             throw new PublicException(messageBuilder.toString());
         }

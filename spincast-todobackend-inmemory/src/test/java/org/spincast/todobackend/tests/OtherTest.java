@@ -11,11 +11,11 @@ import java.lang.reflect.Field;
 import org.junit.Before;
 import org.junit.Test;
 import org.spincast.core.validation.IValidationResult;
-import org.spincast.core.validation.IValidatorFactory;
 import org.spincast.shaded.org.apache.commons.lang3.StringUtils;
 import org.spincast.todobackend.inmemory.config.AppConstants;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.Todo;
+import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
 import org.spincast.todobackend.inmemory.repositories.InMemoryTodoRepository;
 
 import com.google.inject.Inject;
@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 public class OtherTest extends AppIntegrationTestBase {
 
     @Inject
-    protected IValidatorFactory<ITodo> todoValidatorFactory;
+    protected TodoValidator todoValidator;
 
     /**
      * Test repository.
@@ -37,6 +37,10 @@ public class OtherTest extends AppIntegrationTestBase {
     public void clearRepo() {
         this.memoryTodoRepository.deleteAllTodos();
         assert (this.memoryTodoRepository.getAllTodos().size() == 0);
+    }
+
+    protected TodoValidator getTodoValidator() {
+        return this.todoValidator;
     }
 
     //==========================================
@@ -96,13 +100,13 @@ public class OtherTest extends AppIntegrationTestBase {
         ITodo todo = new Todo();
         todo.setTitle(StringUtils.repeat("x", 255));
 
-        IValidationResult validator = this.todoValidatorFactory.create(todo);
-        assertTrue(validator.isValid());
+        IValidationResult validationResult = getTodoValidator().validate(todo);
+        assertTrue(validationResult.isValid());
 
         todo.setTitle(StringUtils.repeat("x", 256));
 
-        validator.revalidate();
-        assertFalse(validator.isValid());
+        validationResult = getTodoValidator().validate(todo);
+        assertFalse(validationResult.isValid());
     }
 
 }
