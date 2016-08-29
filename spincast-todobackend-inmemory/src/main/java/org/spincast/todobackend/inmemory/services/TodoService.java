@@ -9,9 +9,8 @@ import java.util.Objects;
 
 import org.spincast.core.exceptions.PublicException;
 import org.spincast.core.json.IJsonObject;
-import org.spincast.core.validation.FormatType;
+import org.spincast.core.validation.ValidationMessageFormatType;
 import org.spincast.core.validation.IValidationResult;
-import org.spincast.core.validation.IValidator;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
 import org.spincast.todobackend.inmemory.repositories.ITodoRepository;
@@ -40,7 +39,7 @@ public class TodoService implements ITodoService {
         return this.todoRepository;
     }
 
-    protected IValidator<ITodo> getTodoValidator() {
+    protected TodoValidator getTodoValidator() {
         return this.todoValidator;
     }
 
@@ -108,7 +107,7 @@ public class TodoService implements ITodoService {
 
             StringBuilder messageBuilder = new StringBuilder("The Todo to add is invalid.\nErrors:\n\n");
 
-            messageBuilder.append(validationResult.getErrorsFormatted(FormatType.PLAIN_TEXT));
+            messageBuilder.append(validationResult.getMessagesFormatted(ValidationMessageFormatType.PLAIN_TEXT));
 
             throw new PublicException(messageBuilder.toString());
         }

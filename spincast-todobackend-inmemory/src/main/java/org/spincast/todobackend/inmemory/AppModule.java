@@ -1,7 +1,6 @@
 package org.spincast.todobackend.inmemory;
 
 import org.spincast.core.config.ISpincastConfig;
-import org.spincast.core.validation.SpincastValidationPluginGuiceModule;
 import org.spincast.defaults.guice.SpincastDefaultGuiceModule;
 import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
@@ -25,11 +24,6 @@ public class AppModule extends SpincastDefaultGuiceModule {
     @Override
     protected void configure() {
         super.configure();
-
-        //==========================================
-        // Install the validation plugin's Guice module.
-        //==========================================
-        install(new SpincastValidationPluginGuiceModule(getRequestContextType(), getWebsocketContextType()));
 
         //==========================================
         // One instance only of our configuration class.
