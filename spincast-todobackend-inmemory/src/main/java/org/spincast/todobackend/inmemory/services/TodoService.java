@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.spincast.core.exceptions.PublicException;
-import org.spincast.core.json.IJsonObject;
-import org.spincast.core.validation.ValidationMessageFormatType;
+import org.spincast.core.json.IJsonObjectMutable;
 import org.spincast.core.validation.IValidationResult;
+import org.spincast.core.validation.ValidationMessageFormatType;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
 import org.spincast.todobackend.inmemory.repositories.ITodoRepository;
@@ -125,21 +125,21 @@ public class TodoService implements ITodoService {
     }
 
     @Override
-    public ITodo patchTodo(ITodo todo, IJsonObject jsonPatch) {
+    public ITodo patchTodo(ITodo todo, IJsonObjectMutable jsonPatch) {
 
         if(todo == null || jsonPatch == null) {
             return todo;
         }
 
-        if(jsonPatch.isKeyExists("title")) {
+        if(jsonPatch.isElementExists("title")) {
             todo.setTitle(jsonPatch.getString("title"));
         }
 
-        if(jsonPatch.isKeyExists("completed")) {
+        if(jsonPatch.isElementExists("completed")) {
             todo.setCompleted(jsonPatch.getBoolean("completed"));
         }
 
-        if(jsonPatch.isKeyExists("order")) {
+        if(jsonPatch.isElementExists("order")) {
             todo.setOrder(jsonPatch.getInteger("order"));
         }
 
