@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.spincast.core.exceptions.PublicException;
-import org.spincast.core.json.IJsonObjectMutable;
+import org.spincast.core.json.IJsonObject;
 import org.spincast.core.validation.IValidationResult;
 import org.spincast.core.validation.ValidationMessageFormatType;
 import org.spincast.todobackend.inmemory.models.ITodo;
@@ -125,7 +125,7 @@ public class TodoService implements ITodoService {
     }
 
     @Override
-    public ITodo patchTodo(ITodo todo, IJsonObjectMutable jsonPatch) {
+    public ITodo patchTodo(ITodo todo, IJsonObject jsonPatch) {
 
         if(todo == null || jsonPatch == null) {
             return todo;
