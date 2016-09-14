@@ -2,7 +2,7 @@ package org.spincast.todobackend.inmemory.services;
 
 import java.util.List;
 
-import org.spincast.core.json.IJsonObject;
+import org.spincast.core.json.IJsonObjectMutable;
 import org.spincast.todobackend.inmemory.models.ITodo;
 
 /**
@@ -35,7 +35,7 @@ public interface ITodoService {
     /**
      * Patches a Todo from the values of a JsonObject.
      */
-    public ITodo patchTodo(ITodo todo, IJsonObject jsonPatch);
+    public ITodo patchTodo(ITodo todo, IJsonObjectMutable jsonPatch);
 
     /**
      * Deletes a Todo.
