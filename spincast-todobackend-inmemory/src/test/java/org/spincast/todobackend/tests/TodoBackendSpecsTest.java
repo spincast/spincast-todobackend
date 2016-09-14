@@ -7,7 +7,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.spincast.core.json.IJsonArray;
-import org.spincast.core.json.IJsonObjectMutable;
+import org.spincast.core.json.IJsonObject;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.plugins.httpclient.IHttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
@@ -40,7 +40,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     @Test
     public void t02() throws Exception {
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "a todo");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -91,7 +91,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "walk the dog");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -110,7 +110,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "blah");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -129,7 +129,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "blah");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -148,7 +148,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "my todo");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -179,7 +179,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "todo the first");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -211,7 +211,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "initial title");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -242,7 +242,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "blah");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -273,7 +273,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "blah");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -313,7 +313,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         deleteAllTodos();
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "blah");
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -337,7 +337,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     @Test
     public void t14() throws Exception {
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("title", "blah");
         jsonObject.put("order", 523);
 
@@ -355,7 +355,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     @Test
     public void t15() throws Exception {
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("order", 10);
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();
@@ -383,7 +383,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     @Test
     public void t16() throws Exception {
 
-        IJsonObjectMutable jsonObject = getJsonManager().create();
+        IJsonObject jsonObject = getJsonManager().create();
         jsonObject.put("order", 10);
 
         IHttpResponse response = POST("/").setEntityJson(jsonObject).send();

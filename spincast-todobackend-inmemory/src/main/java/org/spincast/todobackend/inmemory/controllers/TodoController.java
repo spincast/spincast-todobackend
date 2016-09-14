@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.spincast.core.exceptions.NotFoundException;
 import org.spincast.core.exchange.IDefaultRequestContext;
-import org.spincast.core.json.IJsonObjectMutable;
+import org.spincast.core.json.IJsonObject;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.Todo;
 import org.spincast.todobackend.inmemory.services.ITodoService;
@@ -12,7 +12,7 @@ import org.spincast.todobackend.inmemory.services.ITodoService;
 import com.google.inject.Inject;
 
 /**
- * Todo's controller implementation.2
+ * Todo's controller implementation.
  */
 public class TodoController implements ITodoController {
 
@@ -86,7 +86,7 @@ public class TodoController implements ITodoController {
             throw new NotFoundException();
         }
 
-        IJsonObjectMutable jsonPatch = context.request().getJsonBodyAsJsonObject();
+        IJsonObject jsonPatch = context.request().getJsonBodyAsJsonObject();
 
         todo = getTodoService().patchTodo(todo, jsonPatch);
 
