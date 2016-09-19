@@ -1,6 +1,6 @@
 package org.spincast.todobackend.inmemory.models.validators;
 
-import org.spincast.core.validation.IValidationBuilder;
+import org.spincast.core.validation.IValidationSet;
 import org.spincast.core.validation.IValidationResult;
 import org.spincast.core.validation.ValidatorBase;
 import org.spincast.todobackend.inmemory.models.ITodo;
@@ -12,7 +12,7 @@ public class TodoValidator extends ValidatorBase {
 
     public IValidationResult validate(ITodo objectToValidate) {
 
-        IValidationBuilder validation = newValidationBuilder();
+        IValidationSet validation = newValidationBuilder();
 
         //==========================================
         // Maximum 255 character for the title
