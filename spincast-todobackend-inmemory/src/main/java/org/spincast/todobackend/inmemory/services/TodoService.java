@@ -9,7 +9,7 @@ import java.util.Objects;
 
 import org.spincast.core.exceptions.PublicException;
 import org.spincast.core.json.IJsonObject;
-import org.spincast.core.validation.IValidationResult;
+import org.spincast.core.validation.IValidationSet;
 import org.spincast.core.validation.ValidationMessageFormatType;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
@@ -101,7 +101,7 @@ public class TodoService implements ITodoService {
      */
     protected void validateTodo(ITodo newTodo) {
 
-        IValidationResult validationResult = getTodoValidator().validate(newTodo);
+        IValidationSet validationResult = getTodoValidator().validate(newTodo);
 
         if(!validationResult.isValid()) {
 

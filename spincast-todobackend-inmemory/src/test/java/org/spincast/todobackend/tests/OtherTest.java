@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.spincast.core.validation.IValidationResult;
+import org.spincast.core.validation.IValidationSet;
 import org.spincast.shaded.org.apache.commons.lang3.StringUtils;
 import org.spincast.todobackend.inmemory.config.AppConstants;
 import org.spincast.todobackend.inmemory.models.ITodo;
@@ -100,7 +100,7 @@ public class OtherTest extends AppIntegrationTestBase {
         ITodo todo = new Todo();
         todo.setTitle(StringUtils.repeat("x", 255));
 
-        IValidationResult validationResult = getTodoValidator().validate(todo);
+        IValidationSet validationResult = getTodoValidator().validate(todo);
         assertTrue(validationResult.isValid());
 
         todo.setTitle(StringUtils.repeat("x", 256));
