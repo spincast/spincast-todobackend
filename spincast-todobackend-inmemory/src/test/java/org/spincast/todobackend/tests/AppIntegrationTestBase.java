@@ -8,7 +8,7 @@ import org.spincast.core.json.JsonArray;
 import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
-import org.spincast.core.websocket.IDefaultWebsocketContext;
+import org.spincast.core.websocket.DefaultWebsocketContext;
 import org.spincast.plugins.httpclient.IHttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
 import org.spincast.testing.core.SpincastIntegrationTestBase;
@@ -22,7 +22,7 @@ import com.google.inject.Injector;
  * our application.
  */
 public abstract class AppIntegrationTestBase extends
-                                             SpincastIntegrationTestBase<DefaultRequestContext, IDefaultWebsocketContext> {
+                                             SpincastIntegrationTestBase<DefaultRequestContext, DefaultWebsocketContext> {
 
     @Inject
     protected JsonManager jsonManager;
@@ -34,7 +34,7 @@ public abstract class AppIntegrationTestBase extends
     @Override
     protected Injector createInjector() {
         return App.createApp(getMainArgs(),
-                             getDefaultOverridingModule(DefaultRequestContext.class, IDefaultWebsocketContext.class));
+                             getDefaultOverridingModule(DefaultRequestContext.class, DefaultWebsocketContext.class));
     }
 
     protected String[] getMainArgs() {
