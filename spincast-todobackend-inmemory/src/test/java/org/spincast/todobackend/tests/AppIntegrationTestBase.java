@@ -3,7 +3,7 @@ package org.spincast.todobackend.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.spincast.core.exchange.IDefaultRequestContext;
+import org.spincast.core.exchange.DefaultRequestContext;
 import org.spincast.core.json.JsonArray;
 import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
@@ -22,7 +22,7 @@ import com.google.inject.Injector;
  * our application.
  */
 public abstract class AppIntegrationTestBase extends
-                                             SpincastIntegrationTestBase<IDefaultRequestContext, IDefaultWebsocketContext> {
+                                             SpincastIntegrationTestBase<DefaultRequestContext, IDefaultWebsocketContext> {
 
     @Inject
     protected JsonManager jsonManager;
@@ -34,7 +34,7 @@ public abstract class AppIntegrationTestBase extends
     @Override
     protected Injector createInjector() {
         return App.createApp(getMainArgs(),
-                             getDefaultOverridingModule(IDefaultRequestContext.class, IDefaultWebsocketContext.class));
+                             getDefaultOverridingModule(DefaultRequestContext.class, IDefaultWebsocketContext.class));
     }
 
     protected String[] getMainArgs() {

@@ -3,7 +3,7 @@ package org.spincast.todobackend.inmemory.controllers;
 import java.util.List;
 
 import org.spincast.core.exceptions.NotFoundException;
-import org.spincast.core.exchange.IDefaultRequestContext;
+import org.spincast.core.exchange.DefaultRequestContext;
 import org.spincast.core.json.JsonObject;
 import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.Todo;
@@ -33,7 +33,7 @@ public class TodoController implements ITodoController {
     /**
      * Get the "todoId" id of a Todo, parsed from the URL.
      */
-    protected int getTodoIdFromPathParam(IDefaultRequestContext context) {
+    protected int getTodoIdFromPathParam(DefaultRequestContext context) {
 
         String todoIdStr = context.request().getPathParam("todoId");
         int todoId = Integer.parseInt(todoIdStr);
@@ -42,14 +42,14 @@ public class TodoController implements ITodoController {
     }
 
     @Override
-    public void getTodosHandler(IDefaultRequestContext context) {
+    public void getTodosHandler(DefaultRequestContext context) {
 
         List<ITodo> todos = getTodoService().getAllTodos();
         context.response().sendJsonObj(todos);
     }
 
     @Override
-    public void addTodoHandler(IDefaultRequestContext context) {
+    public void addTodoHandler(DefaultRequestContext context) {
 
         ITodo newTodo = context.request().getJsonBody(Todo.class);
         if(newTodo != null) {
@@ -59,12 +59,12 @@ public class TodoController implements ITodoController {
     }
 
     @Override
-    public void deleteTodosHandler(IDefaultRequestContext context) {
+    public void deleteTodosHandler(DefaultRequestContext context) {
         getTodoService().deleteAllTodos();
     }
 
     @Override
-    public void getTodoHandler(IDefaultRequestContext context) {
+    public void getTodoHandler(DefaultRequestContext context) {
 
         int todoId = getTodoIdFromPathParam(context);
 
@@ -77,7 +77,7 @@ public class TodoController implements ITodoController {
     }
 
     @Override
-    public void patchTodoHandler(IDefaultRequestContext context) {
+    public void patchTodoHandler(DefaultRequestContext context) {
 
         int todoId = getTodoIdFromPathParam(context);
 
@@ -94,7 +94,7 @@ public class TodoController implements ITodoController {
     }
 
     @Override
-    public void deleteTodoHandler(IDefaultRequestContext context) {
+    public void deleteTodoHandler(DefaultRequestContext context) {
 
         int todoId = getTodoIdFromPathParam(context);
         getTodoService().deleteTodo(todoId);

@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-import org.spincast.core.exceptions.PublicException;
+import org.spincast.core.exceptions.PublicExceptionDefault;
 import org.spincast.core.json.JsonObject;
 import org.spincast.core.validation.IValidationSet;
 import org.spincast.core.validation.ValidationMessageFormatType;
@@ -109,7 +109,7 @@ public class TodoService implements ITodoService {
 
             messageBuilder.append(validationResult.getMessagesFormatted(ValidationMessageFormatType.PLAIN_TEXT));
 
-            throw new PublicException(messageBuilder.toString());
+            throw new PublicExceptionDefault(messageBuilder.toString());
         }
     }
 

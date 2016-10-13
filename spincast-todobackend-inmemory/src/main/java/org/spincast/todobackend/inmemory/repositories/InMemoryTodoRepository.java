@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spincast.core.exceptions.PublicException;
+import org.spincast.core.exceptions.PublicExceptionDefault;
 import org.spincast.todobackend.inmemory.config.AppConstants;
 import org.spincast.todobackend.inmemory.models.ITodo;
 
@@ -60,7 +60,7 @@ public class InMemoryTodoRepository implements ITodoRepository {
 
         if(getTodosMap().size() >= AppConstants.MAX_TODOS_NBR) {
             deleteAllTodos();
-            throw new PublicException("Too many Todos, please start again...");
+            throw new PublicExceptionDefault("Too many Todos, please start again...");
         }
 
         int id = getNextTodoId();
