@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spincast.core.server.Server;
 import org.spincast.plugins.routing.DefaultRouter;
-import org.spincast.todobackend.inmemory.controllers.ITodoController;
+import org.spincast.todobackend.inmemory.controllers.TodoController;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
@@ -74,7 +74,7 @@ public class App {
     //==========================================
     private final Server server;
     private final DefaultRouter router;
-    private final ITodoController todoController;
+    private final TodoController todoController;
 
     /**
      * The application constructor which Guice will call
@@ -83,7 +83,7 @@ public class App {
     @Inject
     public App(Server server,
                DefaultRouter router,
-               ITodoController todoController) {
+               TodoController todoController) {
         this.server = server;
         this.router = router;
         this.todoController = todoController;
@@ -97,7 +97,7 @@ public class App {
         return this.router;
     }
 
-    protected ITodoController getTodoController() {
+    protected TodoController getTodoController() {
         return this.todoController;
     }
 
