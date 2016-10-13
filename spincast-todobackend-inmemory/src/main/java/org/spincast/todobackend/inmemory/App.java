@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spincast.core.server.IServer;
+import org.spincast.core.server.Server;
 import org.spincast.plugins.routing.IDefaultRouter;
 import org.spincast.todobackend.inmemory.controllers.ITodoController;
 
@@ -72,7 +72,7 @@ public class App {
     //==========================================
     // The application
     //==========================================
-    private final IServer server;
+    private final Server server;
     private final IDefaultRouter router;
     private final ITodoController todoController;
 
@@ -81,7 +81,7 @@ public class App {
      * with the required dependencies.
      */
     @Inject
-    public App(IServer server,
+    public App(Server server,
                IDefaultRouter router,
                ITodoController todoController) {
         this.server = server;
@@ -89,7 +89,7 @@ public class App {
         this.todoController = todoController;
     }
 
-    protected IServer getServer() {
+    protected Server getServer() {
         return this.server;
     }
 

@@ -1,6 +1,6 @@
 package org.spincast.todobackend.inmemory.config;
 
-import org.spincast.core.config.ISpincastConfig;
+import org.spincast.core.config.SpincastConfig;
 
 /**
  * Application's custom configurations.
@@ -10,7 +10,7 @@ import org.spincast.core.config.ISpincastConfig;
  * as the implementation for this interface too.
  * </p>
  */
-public interface IAppConfig extends ISpincastConfig {
+public interface IAppConfig extends SpincastConfig {
 
     /**
      * The template for a Todo's unique URL. A placeholder

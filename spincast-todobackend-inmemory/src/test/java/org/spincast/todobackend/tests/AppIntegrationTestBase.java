@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.spincast.core.exchange.IDefaultRequestContext;
-import org.spincast.core.json.IJsonArray;
-import org.spincast.core.json.IJsonManager;
+import org.spincast.core.json.JsonArray;
+import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
 import org.spincast.core.websocket.IDefaultWebsocketContext;
@@ -25,7 +25,7 @@ public abstract class AppIntegrationTestBase extends
                                              SpincastIntegrationTestBase<IDefaultRequestContext, IDefaultWebsocketContext> {
 
     @Inject
-    protected IJsonManager jsonManager;
+    protected JsonManager jsonManager;
 
     /**
      * Creates the application and returns the Guice
@@ -52,7 +52,7 @@ public abstract class AppIntegrationTestBase extends
         }
     }
 
-    protected IJsonManager getJsonManager() {
+    protected JsonManager getJsonManager() {
         return this.jsonManager;
     }
 
@@ -61,18 +61,18 @@ public abstract class AppIntegrationTestBase extends
         IHttpResponse response = DELETE("/").send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
-        IJsonArray jsonArray = getAllTodos();
+        JsonArray jsonArray = getAllTodos();
         assertEquals(0, jsonArray.size());
     }
 
-    protected IJsonArray getAllTodos() throws Exception {
+    protected JsonArray getAllTodos() throws Exception {
 
         IHttpResponse response = GET("/").send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         assertEquals(ContentTypeDefaults.JSON.getMainVariationWithUtf8Charset(), response.getContentType());
 
-        IJsonArray jsonArray = getJsonManager().createArray(response.getContentAsString());
+        JsonArray jsonArray = getJsonManager().createArray(response.getContentAsString());
         assertNotNull(jsonArray);
 
         return jsonArray;

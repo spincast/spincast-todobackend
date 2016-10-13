@@ -3,7 +3,7 @@ package org.spincast.todobackend.inmemory.models;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.spincast.core.templating.ITemplatingEngine;
+import org.spincast.core.templating.TemplatingEngine;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
 
 import com.google.inject.Inject;
@@ -20,7 +20,7 @@ public class Todo implements ITodo {
     private String url;
 
     private IAppConfig appConfig;
-    private ITemplatingEngine templatingEngine;
+    private TemplatingEngine templatingEngine;
 
     /**
      * In Spincast, dependencies are injected in
@@ -34,7 +34,7 @@ public class Todo implements ITodo {
     }
 
     @Inject
-    public void setTemplatingEngine(ITemplatingEngine templatingEngine) {
+    public void setTemplatingEngine(TemplatingEngine templatingEngine) {
         this.templatingEngine = templatingEngine;
     }
 
@@ -42,7 +42,7 @@ public class Todo implements ITodo {
         return this.appConfig;
     }
 
-    protected ITemplatingEngine getTemplatingEngine() {
+    protected TemplatingEngine getTemplatingEngine() {
         return this.templatingEngine;
     }
 

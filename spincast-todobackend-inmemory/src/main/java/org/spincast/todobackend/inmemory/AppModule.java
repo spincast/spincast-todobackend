@@ -1,6 +1,6 @@
 package org.spincast.todobackend.inmemory;
 
-import org.spincast.core.config.ISpincastConfig;
+import org.spincast.core.config.SpincastConfig;
 import org.spincast.defaults.guice.SpincastDefaultGuiceModule;
 import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.IAppConfig;
@@ -61,7 +61,7 @@ public class AppModule extends SpincastDefaultGuiceModule {
      */
     @Override
     protected void bindConfigPlugin() {
-        bind(ISpincastConfig.class).to(AppConfig.class).in(Scopes.SINGLETON);
+        bind(SpincastConfig.class).to(AppConfig.class).in(Scopes.SINGLETON);
     }
 
 }
