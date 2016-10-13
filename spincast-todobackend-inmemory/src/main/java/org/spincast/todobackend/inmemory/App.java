@@ -5,7 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spincast.core.server.Server;
-import org.spincast.plugins.routing.IDefaultRouter;
+import org.spincast.plugins.routing.DefaultRouter;
 import org.spincast.todobackend.inmemory.controllers.ITodoController;
 
 import com.google.common.collect.Lists;
@@ -73,7 +73,7 @@ public class App {
     // The application
     //==========================================
     private final Server server;
-    private final IDefaultRouter router;
+    private final DefaultRouter router;
     private final ITodoController todoController;
 
     /**
@@ -82,7 +82,7 @@ public class App {
      */
     @Inject
     public App(Server server,
-               IDefaultRouter router,
+               DefaultRouter router,
                ITodoController todoController) {
         this.server = server;
         this.router = router;
@@ -93,7 +93,7 @@ public class App {
         return this.server;
     }
 
-    protected IDefaultRouter getRouter() {
+    protected DefaultRouter getRouter() {
         return this.router;
     }
 
