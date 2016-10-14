@@ -9,7 +9,7 @@ import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
 import org.spincast.core.websocket.DefaultWebsocketContext;
-import org.spincast.plugins.httpclient.IHttpResponse;
+import org.spincast.plugins.httpclient.HttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
 import org.spincast.testing.core.SpincastIntegrationTestBase;
 import org.spincast.todobackend.inmemory.App;
@@ -58,7 +58,7 @@ public abstract class AppIntegrationTestBase extends
 
     protected void deleteAllTodos() throws Exception {
 
-        IHttpResponse response = DELETE("/").send();
+        HttpResponse response = DELETE("/").send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         JsonArray jsonArray = getAllTodos();
@@ -67,7 +67,7 @@ public abstract class AppIntegrationTestBase extends
 
     protected JsonArray getAllTodos() throws Exception {
 
-        IHttpResponse response = GET("/").send();
+        HttpResponse response = GET("/").send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         assertEquals(ContentTypeDefaults.JSON.getMainVariationWithUtf8Charset(), response.getContentType());
