@@ -32,7 +32,7 @@ public class AppModule extends SpincastDefaultGuiceModule {
 
         //==========================================
         // Binds our configuration implementation class to our
-        // "IAppConfig" interface.
+        // "AppConfig" interface.
         //==========================================
         bind(AppConfig.class).to(AppConfigDefault.class).in(Scopes.SINGLETON);
 
