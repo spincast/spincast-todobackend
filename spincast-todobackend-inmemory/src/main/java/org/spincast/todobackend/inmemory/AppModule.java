@@ -57,7 +57,7 @@ public class AppModule extends SpincastDefaultGuiceModule {
 
     /**
      * We tell Spincast to use our custom configuration class
-     * as the implementation for its "ISpincastConfig" component.
+     * as the implementation for its "SpincastConfig" component.
      */
     @Override
     protected void bindConfigPlugin() {

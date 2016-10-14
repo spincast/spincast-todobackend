@@ -6,7 +6,7 @@ import org.spincast.core.config.SpincastConfig;
  * Application's custom configurations.
  * 
  * <p>
- * Extends <code>ISpincastConfig</code> so we can use this class 
+ * Extends <code>SpincastConfig</code> so we can use this class 
  * as the implementation for this interface too.
  * </p>
  */

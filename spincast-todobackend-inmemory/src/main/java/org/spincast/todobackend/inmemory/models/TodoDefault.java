@@ -25,8 +25,8 @@ public class TodoDefault implements Todo {
     /**
      * In Spincast, dependencies are injected in
      * Objects once deserialized using 
-     * {@link org.spincast.core.json.IJsonManager IJsonManager}
-     * or {@link org.spincast.core.xml.IXmlManager IXmlManager}.
+     * {@link org.spincast.core.json.JsonManager JsonManager}
+     * or {@link org.spincast.core.xml.XmlManager XmlManager}.
      */
     @Inject
     public void setAppConfig(AppConfig appConfig) {
