@@ -45,7 +45,7 @@ public class TodoControllerDefault implements TodoController {
     public void getTodosHandler(DefaultRequestContext context) {
 
         List<Todo> todos = getTodoService().getAllTodos();
-        context.response().sendJsonObj(todos);
+        context.response().sendJson(todos);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class TodoControllerDefault implements TodoController {
         if(newTodo != null) {
             newTodo = getTodoService().addTodo(newTodo);
         }
-        context.response().sendJsonObj(newTodo);
+        context.response().sendJson(newTodo);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class TodoControllerDefault implements TodoController {
             throw new NotFoundException();
         }
 
-        context.response().sendJsonObj(todo);
+        context.response().sendJson(todo);
     }
 
     @Override
@@ -86,11 +86,11 @@ public class TodoControllerDefault implements TodoController {
             throw new NotFoundException();
         }
 
-        JsonObject jsonPatch = context.request().getJsonBodyAsJsonObject();
+        JsonObject jsonPatch = context.request().getJsonBody();
 
         todo = getTodoService().patchTodo(todo, jsonPatch);
 
-        context.response().sendJsonObj(todo);
+        context.response().sendJson(todo);
     }
 
     @Override
