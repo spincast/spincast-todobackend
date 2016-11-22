@@ -72,7 +72,7 @@ public abstract class AppIntegrationTestBase extends
 
         assertEquals(ContentTypeDefaults.JSON.getMainVariationWithUtf8Charset(), response.getContentType());
 
-        JsonArray jsonArray = getJsonManager().createArray(response.getContentAsString());
+        JsonArray jsonArray = getJsonManager().fromStringArray(response.getContentAsString());
         assertNotNull(jsonArray);
 
         return jsonArray;
