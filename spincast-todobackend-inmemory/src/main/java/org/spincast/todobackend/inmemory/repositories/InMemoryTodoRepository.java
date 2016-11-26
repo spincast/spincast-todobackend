@@ -6,30 +6,30 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spincast.core.exceptions.PublicException;
+import org.spincast.core.exceptions.PublicExceptionDefault;
 import org.spincast.todobackend.inmemory.config.AppConstants;
-import org.spincast.todobackend.inmemory.models.ITodo;
+import org.spincast.todobackend.inmemory.models.Todo;
 
 /**
  * In-memory Todo's repository implementation.
  */
-public class InMemoryTodoRepository implements ITodoRepository {
+public class InMemoryTodoRepository implements TodoRepository {
 
     protected final Logger logger = LoggerFactory.getLogger(InMemoryTodoRepository.class);
 
     /**
      * The in-memory Todos.
      */
-    private Map<Integer, ITodo> inMemoryTodos;
+    private Map<Integer, Todo> inMemoryTodos;
 
     /**
      * Dummy sequence for the Todos' ids.
      */
     private int todoIdsSequence = 1;
 
-    protected Map<Integer, ITodo> getTodosMap() {
+    protected Map<Integer, Todo> getTodosMap() {
         if(this.inMemoryTodos == null) {
-            this.inMemoryTodos = new HashMap<Integer, ITodo>();
+            this.inMemoryTodos = new HashMap<Integer, Todo>();
         }
         return this.inMemoryTodos;
     }
@@ -51,16 +51,16 @@ public class InMemoryTodoRepository implements ITodoRepository {
     }
 
     @Override
-    public Collection<ITodo> getAllTodos() {
+    public Collection<Todo> getAllTodos() {
         return getTodosMap().values();
     }
 
     @Override
-    public ITodo addTodo(ITodo newTodo) {
+    public Todo addTodo(Todo newTodo) {
 
         if(getTodosMap().size() >= AppConstants.MAX_TODOS_NBR) {
             deleteAllTodos();
-            throw new PublicException("Too many Todos, please start again...");
+            throw new PublicExceptionDefault("Too many Todos, please start again...");
         }
 
         int id = getNextTodoId();
@@ -78,7 +78,7 @@ public class InMemoryTodoRepository implements ITodoRepository {
     }
 
     @Override
-    public ITodo getTodo(int id) {
+    public Todo getTodo(int id) {
         return getTodosMap().get(id);
     }
 

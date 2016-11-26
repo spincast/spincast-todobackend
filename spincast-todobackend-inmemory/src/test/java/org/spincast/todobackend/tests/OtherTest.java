@@ -10,12 +10,12 @@ import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.spincast.plugins.validation.IValidator;
-import org.spincast.plugins.validation.IValidatorFactory;
+import org.spincast.core.validation.ValidationSet;
 import org.spincast.shaded.org.apache.commons.lang3.StringUtils;
 import org.spincast.todobackend.inmemory.config.AppConstants;
-import org.spincast.todobackend.inmemory.models.ITodo;
 import org.spincast.todobackend.inmemory.models.Todo;
+import org.spincast.todobackend.inmemory.models.TodoDefault;
+import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
 import org.spincast.todobackend.inmemory.repositories.InMemoryTodoRepository;
 
 import com.google.inject.Inject;
@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 public class OtherTest extends AppIntegrationTestBase {
 
     @Inject
-    IValidatorFactory<ITodo> todoValidatorFactory;
+    protected TodoValidator todoValidator;
 
     /**
      * Test repository.
@@ -39,6 +39,10 @@ public class OtherTest extends AppIntegrationTestBase {
         assert (this.memoryTodoRepository.getAllTodos().size() == 0);
     }
 
+    protected TodoValidator getTodoValidator() {
+        return this.todoValidator;
+    }
+
     //==========================================
     // Maximum number of Todos.
     //==========================================
@@ -46,11 +50,11 @@ public class OtherTest extends AppIntegrationTestBase {
     public void maxTodoNbr() throws Exception {
 
         for(int i = 0; i < AppConstants.MAX_TODOS_NBR; i++) {
-            this.memoryTodoRepository.addTodo(new Todo());
+            this.memoryTodoRepository.addTodo(new TodoDefault());
         }
 
         try {
-            this.memoryTodoRepository.addTodo(new Todo());
+            this.memoryTodoRepository.addTodo(new TodoDefault());
             fail();
         } catch(Exception ex) {
         }
@@ -71,18 +75,18 @@ public class OtherTest extends AppIntegrationTestBase {
         todoIdsSequenceField.setAccessible(true);
         todoIdsSequenceField.set(this.memoryTodoRepository, Integer.MAX_VALUE - 1);
 
-        ITodo addTodo = this.memoryTodoRepository.addTodo(new Todo());
+        Todo addTodo = this.memoryTodoRepository.addTodo(new TodoDefault());
         assertNotNull(addTodo);
         assertEquals(Integer.valueOf(Integer.MAX_VALUE - 1), addTodo.getId());
 
-        addTodo = this.memoryTodoRepository.addTodo(new Todo());
+        addTodo = this.memoryTodoRepository.addTodo(new TodoDefault());
         assertNotNull(addTodo);
         assertEquals(Integer.valueOf(Integer.MAX_VALUE), addTodo.getId());
 
         //==========================================
         // Sequence should have been restarted!
         //==========================================
-        addTodo = this.memoryTodoRepository.addTodo(new Todo());
+        addTodo = this.memoryTodoRepository.addTodo(new TodoDefault());
         assertNotNull(addTodo);
         assertEquals(Integer.valueOf(1), addTodo.getId());
     }
@@ -93,16 +97,16 @@ public class OtherTest extends AppIntegrationTestBase {
     @Test
     public void titleMaxLength() throws Exception {
 
-        ITodo todo = new Todo();
+        Todo todo = new TodoDefault();
         todo.setTitle(StringUtils.repeat("x", 255));
 
-        IValidator validator = this.todoValidatorFactory.create(todo);
-        assertTrue(validator.isValid());
+        ValidationSet validationResult = getTodoValidator().validate(todo);
+        assertTrue(validationResult.isValid());
 
         todo.setTitle(StringUtils.repeat("x", 256));
 
-        validator.revalidate();
-        assertFalse(validator.isValid());
+        validationResult = getTodoValidator().validate(todo);
+        assertFalse(validationResult.isValid());
     }
 
 }

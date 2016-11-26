@@ -1,112 +1,56 @@
 package org.spincast.todobackend.inmemory.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.spincast.core.templating.ITemplatingEngine;
-import org.spincast.todobackend.inmemory.config.IAppConfig;
-
-import com.google.inject.Inject;
-
 /**
- * The Todo model implementation.
+ * The Todo model.
  */
-public class Todo implements ITodo {
-
-    private Integer id;
-    private String title;
-    private boolean completed = false;
-    private int order = 0;
-    private String url;
-
-    private IAppConfig appConfig;
-    private ITemplatingEngine templatingEngine;
+public interface Todo {
 
     /**
-     * In Spincast, dependencies are injected in
-     * Objects once deserialized using 
-     * {@link org.spincast.core.json.IJsonManager IJsonManager}
-     * or {@link org.spincast.core.xml.IXmlManager IXmlManager}.
+     * Gets the id. 
+     * 
+     * @return the id or <code>null</code> if the
+     * Todo has not been saved in the repository yet.
      */
-    @Inject
-    public void setAppConfig(IAppConfig appConfig) {
-        this.appConfig = appConfig;
-    }
+    public Integer getId();
 
-    @Inject
-    public void setTemplatingEngine(ITemplatingEngine templatingEngine) {
-        this.templatingEngine = templatingEngine;
-    }
+    /**
+     * Sets the id.
+     */
+    public void setId(int id);
 
-    protected IAppConfig getAppConfig() {
-        return this.appConfig;
-    }
+    /**
+     * Gets the title.
+     */
+    public String getTitle();
 
-    protected ITemplatingEngine getTemplatingEngine() {
-        return this.templatingEngine;
-    }
+    /**
+     * Sets the title
+     */
+    public void setTitle(String title);
 
-    @Override
-    public Integer getId() {
-        return this.id;
-    }
+    /**
+     * Is the Todo completed?
+     */
+    public boolean isCompleted();
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
+    /**
+     * Sets completed or not.
+     */
+    public void setCompleted(boolean completed);
 
-    @Override
-    public String getUrl() {
+    /**
+     * Gets the unique URL to this Todo.
+     */
+    public String getUrl();
 
-        if(this.url == null) {
+    /**
+     * Gets the order.
+     */
+    public int getOrder();
 
-            if(this.id == null) {
-                throw new RuntimeException("The Todo has to be saved first to have an id and an unique URL!");
-            }
-
-            String urlTemplate = getAppConfig().getTodoUrlTemplate();
-
-            //==========================================
-            // We could do a simple "String.replace()" here, but 
-            // let's see how the templating engine can be used
-            // with inline content!
-            //==========================================
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("id", getId());
-            this.url = getTemplatingEngine().evaluate(urlTemplate, params);
-        }
-        return this.url;
-    }
-
-    @Override
-    public String getTitle() {
-        return this.title;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public boolean isCompleted() {
-        return this.completed;
-    }
-
-    @Override
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    @Override
-    public int getOrder() {
-        return this.order;
-    }
-
-    @Override
-    public void setOrder(int order) {
-        this.order = order;
-    }
+    /**
+     * Sets the order.
+     */
+    public void setOrder(int order);
 
 }

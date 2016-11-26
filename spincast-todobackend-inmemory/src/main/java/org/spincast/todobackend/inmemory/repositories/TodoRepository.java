@@ -2,22 +2,22 @@ package org.spincast.todobackend.inmemory.repositories;
 
 import java.util.Collection;
 
-import org.spincast.todobackend.inmemory.models.ITodo;
+import org.spincast.todobackend.inmemory.models.Todo;
 
 /**
  * Todo's repository.
  */
-public interface ITodoRepository {
+public interface TodoRepository {
 
     /**
      * Gets all Todos.
      */
-    public Collection<ITodo> getAllTodos();
+    public Collection<Todo> getAllTodos();
 
     /**
      * Adds a Todo.
      */
-    public ITodo addTodo(ITodo newTodo);
+    public Todo addTodo(Todo newTodo);
 
     /**
      * Deletes all Todos.
@@ -29,7 +29,7 @@ public interface ITodoRepository {
      * 
      * @return the Todo or <code>null</code> if not found.
      */
-    public ITodo getTodo(int todoId);
+    public Todo getTodo(int todoId);
 
     /**
      * Deletes a Todos.
