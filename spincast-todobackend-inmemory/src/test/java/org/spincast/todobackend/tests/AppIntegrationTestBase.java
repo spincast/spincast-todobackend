@@ -15,7 +15,6 @@ import org.spincast.testing.core.SpincastIntegrationTestBase;
 import org.spincast.todobackend.inmemory.App;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * Integration test base class specifically made for 
@@ -27,14 +26,9 @@ public abstract class AppIntegrationTestBase extends
     @Inject
     protected JsonManager jsonManager;
 
-    /**
-     * Creates the application and returns the Guice
-     * injector.
-     */
     @Override
-    protected Injector createInjector() {
-        return App.createApp(getMainArgs(),
-                             getDefaultOverridingModule(DefaultRequestContext.class, DefaultWebsocketContext.class));
+    protected void startApp() {
+        App.main(getMainArgs());
     }
 
     protected String[] getMainArgs() {
