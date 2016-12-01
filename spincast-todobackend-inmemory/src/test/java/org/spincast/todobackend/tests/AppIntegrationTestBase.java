@@ -3,15 +3,13 @@ package org.spincast.todobackend.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.spincast.core.exchange.DefaultRequestContext;
 import org.spincast.core.json.JsonArray;
 import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
-import org.spincast.core.websocket.DefaultWebsocketContext;
+import org.spincast.defaults.tests.AppDefaultContextesIntegrationTestBase;
 import org.spincast.plugins.httpclient.HttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
-import org.spincast.testing.core.SpincastIntegrationTestBase;
 import org.spincast.todobackend.inmemory.App;
 
 import com.google.inject.Inject;
@@ -20,8 +18,7 @@ import com.google.inject.Inject;
  * Integration test base class specifically made for 
  * our application.
  */
-public abstract class AppIntegrationTestBase extends
-                                             SpincastIntegrationTestBase<DefaultRequestContext, DefaultWebsocketContext> {
+public abstract class AppIntegrationTestBase extends AppDefaultContextesIntegrationTestBase {
 
     @Inject
     protected JsonManager jsonManager;

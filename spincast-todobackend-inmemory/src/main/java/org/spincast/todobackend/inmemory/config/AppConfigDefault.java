@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.spincast.core.guice.MainArgs;
 import org.spincast.core.utils.SpincastUtils;
 import org.spincast.plugins.configpropsfile.SpincastConfigPropsFileBased;
-import org.spincast.plugins.configpropsfile.SpincastConfigPropsFileBasedConfig;
+import org.spincast.plugins.configpropsfile.SpincastConfigPropsFilePluginConfig;
 
 import com.google.inject.Inject;
 
@@ -28,7 +28,7 @@ public class AppConfigDefault extends SpincastConfigPropsFileBased implements Ap
     @Inject
     public AppConfigDefault(SpincastUtils spincastUtils,
                             @MainArgs @Nullable String[] mainArgs,
-                            SpincastConfigPropsFileBasedConfig pluginConfig) {
+                            SpincastConfigPropsFilePluginConfig pluginConfig) {
         super(spincastUtils, mainArgs, pluginConfig);
     }
 
