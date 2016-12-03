@@ -2,6 +2,7 @@ package org.spincast.todobackend.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -12,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.spincast.core.validation.ValidationSet;
 import org.spincast.shaded.org.apache.commons.lang3.StringUtils;
+import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.AppConstants;
 import org.spincast.todobackend.inmemory.models.Todo;
 import org.spincast.todobackend.inmemory.models.TodoDefault;
@@ -26,7 +28,18 @@ import com.google.inject.Inject;
 public class OtherTest extends AppIntegrationTestBase {
 
     @Inject
+    protected AppConfig appConfig;
+
+    @Inject
     protected TodoValidator todoValidator;
+
+    protected AppConfig getAppConfig() {
+        return this.appConfig;
+    }
+
+    protected TodoValidator getTodoValidator() {
+        return this.todoValidator;
+    }
 
     /**
      * Test repository.
@@ -39,8 +52,14 @@ public class OtherTest extends AppIntegrationTestBase {
         assert (this.memoryTodoRepository.getAllTodos().size() == 0);
     }
 
-    protected TodoValidator getTodoValidator() {
-        return this.todoValidator;
+    @Test
+    public void testingConfigAreWorkingProperly() throws Exception {
+
+        int port = getAppConfig().getHttpServerPort();
+        assertNotEquals(44419, port);
+
+        port = getSpincastConfig().getHttpServerPort();
+        assertNotEquals(44419, port);
     }
 
     //==========================================
