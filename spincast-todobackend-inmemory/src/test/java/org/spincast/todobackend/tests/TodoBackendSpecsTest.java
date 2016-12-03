@@ -160,6 +160,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         String url = jsonObject.getString("url");
 
         response = GET(url, true).send();
+        assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
         assertNotNull(jsonObject);
