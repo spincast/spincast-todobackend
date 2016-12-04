@@ -3,7 +3,7 @@ package org.spincast.todobackend.inmemory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spincast.core.server.Server;
-import org.spincast.defaults.bootstrap.Spincast;
+import org.spincast.defaults.bootstrapping.Spincast;
 import org.spincast.plugins.routing.DefaultRouter;
 import org.spincast.todobackend.inmemory.controllers.TodoController;
 

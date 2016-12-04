@@ -7,7 +7,7 @@ import org.spincast.core.json.JsonArray;
 import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
-import org.spincast.defaults.tests.IntegrationTestAppDefaultContextsBase;
+import org.spincast.defaults.testing.IntegrationTestAppDefaultContextsBase;
 import org.spincast.plugins.httpclient.HttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
 import org.spincast.todobackend.inmemory.App;
@@ -24,7 +24,7 @@ public abstract class AppIntegrationTestBase extends IntegrationTestAppDefaultCo
     protected JsonManager jsonManager;
 
     @Override
-    protected void startApp() {
+    protected void initApp() {
         App.main(getMainArgs());
     }
 
