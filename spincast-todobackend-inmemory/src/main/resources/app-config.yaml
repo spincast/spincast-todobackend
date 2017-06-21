@@ -1,0 +1,5 @@
+spincast:
+  server: 
+    port: 44419
+  publicAccess:
+      urlBase: http://localhost:44419

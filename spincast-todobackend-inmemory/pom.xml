@@ -16,7 +16,7 @@
     
     <properties>
         <app.mainClass>org.spincast.todobackend.inmemory.App</app.mainClass>
-        <spincast.version>0.9.31</spincast.version>
+        <spincast.version>0.9.32</spincast.version>
     </properties>
 
 	<dependencies>
@@ -27,15 +27,6 @@
         <dependency>
             <groupId>org.spincast</groupId>
             <artifactId>spincast-default</artifactId>
-            <version>${spincast.version}</version>
-        </dependency>
-        
-        <!--=================================== 
-        Spincast properties file based config plugin
-        ====================================-->
-        <dependency>
-            <groupId>org.spincast</groupId>
-            <artifactId>spincast-plugins-config-properties-file</artifactId>
             <version>${spincast.version}</version>
         </dependency>
         

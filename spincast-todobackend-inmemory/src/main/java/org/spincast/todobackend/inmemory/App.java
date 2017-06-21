@@ -23,8 +23,7 @@ public class App {
     public static void main(String[] args) {
         Spincast.configure()
                 .module(new AppModule())
-                .mainArgs(args)
-                .init();
+                .init(args);
     }
 
     //==========================================

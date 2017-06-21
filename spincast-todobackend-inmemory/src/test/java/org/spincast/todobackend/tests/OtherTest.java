@@ -68,14 +68,14 @@ public class OtherTest extends AppIntegrationTestBase {
     @Test
     public void maxTodoNbr() throws Exception {
 
-        for(int i = 0; i < AppConstants.MAX_TODOS_NBR; i++) {
+        for (int i = 0; i < AppConstants.MAX_TODOS_NBR; i++) {
             this.memoryTodoRepository.addTodo(new TodoDefault());
         }
 
         try {
             this.memoryTodoRepository.addTodo(new TodoDefault());
             fail();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
         }
 
         assertEquals(0, this.memoryTodoRepository.getAllTodos().size());
@@ -127,5 +127,6 @@ public class OtherTest extends AppIntegrationTestBase {
         validationResult = getTodoValidator().validate(todo);
         assertFalse(validationResult.isValid());
     }
+
 
 }
