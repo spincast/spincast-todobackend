@@ -128,5 +128,4 @@ public class OtherTest extends AppIntegrationTestBase {
         assertFalse(validationResult.isValid());
     }
 
-
 }

@@ -8,11 +8,11 @@ import org.spincast.core.json.JsonArray;
 import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
-import org.spincast.defaults.testing.IntegrationTestAppDefaultContextsBase;
+import org.spincast.defaults.testing.AppBasedDefaultContextTypesTestingBase;
 import org.spincast.plugins.config.SpincastConfigPluginConfig;
 import org.spincast.plugins.httpclient.HttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
-import org.spincast.testing.core.AppTestingConfigInfo;
+import org.spincast.testing.core.AppTestingConfigs;
 import org.spincast.testing.core.utils.SpincastTestUtils;
 import org.spincast.todobackend.inmemory.App;
 import org.spincast.todobackend.inmemory.config.AppConfig;
@@ -24,18 +24,48 @@ import com.google.inject.Inject;
  * Integration test base class specifically made for 
  * our application.
  */
-public abstract class AppIntegrationTestBase extends IntegrationTestAppDefaultContextsBase {
+public abstract class AppIntegrationTestBase extends AppBasedDefaultContextTypesTestingBase {
 
     @Inject
     protected JsonManager jsonManager;
 
     @Override
-    protected void initApp() {
+    protected void startApp() {
         App.main(getMainArgs());
     }
 
     protected String[] getMainArgs() {
         return null;
+    }
+
+    /**
+     * We specify our testing configurations informations.
+     */
+    @Override
+    protected AppTestingConfigs getAppTestingConfigs() {
+
+        return new AppTestingConfigs() {
+
+            @Override
+            public boolean isBindAppClass() {
+                return true;
+            }
+
+            @Override
+            public Class<? extends SpincastConfig> getSpincastConfigTestingImplementationClass() {
+                return AppTestingConfig.class;
+            }
+
+            @Override
+            public Class<?> getAppConfigInterface() {
+                return AppConfig.class;
+            }
+
+            @Override
+            public Class<?> getAppConfigTestingImplementationClass() {
+                return AppTestingConfig.class;
+            }
+        };
     }
 
     /**
@@ -97,30 +127,6 @@ public abstract class AppIntegrationTestBase extends IntegrationTestAppDefaultCo
         }
     }
 
-    /**
-     * We specify our testing configurations informations.
-     */
-    @Override
-    protected AppTestingConfigInfo getAppTestingConfigInfo() {
-
-        return new AppTestingConfigInfo() {
-
-            @Override
-            public Class<? extends SpincastConfig> getSpincastConfigTestingImplementationClass() {
-                return AppTestingConfig.class;
-            }
-
-            @Override
-            public Class<?> getAppConfigInterface() {
-                return AppConfig.class;
-            }
-
-            @Override
-            public Class<?> getAppConfigTestingImplementationClass() {
-                return AppTestingConfig.class;
-            }
-        };
-    }
 
     @Override
     public void beforeClass() {
