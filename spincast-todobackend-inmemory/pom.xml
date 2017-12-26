@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.spincast</groupId>
         <artifactId>spincast-parent-pom</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
     </parent>
     
     <artifactId>spincast-todobackend-inmemory</artifactId>
@@ -16,7 +16,7 @@
     
     <properties>
         <app.mainClass>org.spincast.todobackend.inmemory.App</app.mainClass>
-        <spincast.version>0.9.33</spincast.version>
+        <spincast.version>0.9.36</spincast.version>
     </properties>
 
 	<dependencies>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.1.7</version>
+            <version>1.2.3</version>
         </dependency>
         
         <!--=================================== 
@@ -52,29 +52,28 @@
 	</dependencies>
 
 	<build>
-    
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.5.1</version>
-					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-        
+
         <plugins>
         
+            <!--=================================== 
+            Java 8 is required.
+            ====================================-->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version><!--$NO-MVN-MAN-VER$-->
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
             <!--=================================== 
             Fat jar creation
             ====================================-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.3</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -114,7 +113,7 @@
             ====================================-->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>2.6.1</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>delete-unwanted-artifacts</id>

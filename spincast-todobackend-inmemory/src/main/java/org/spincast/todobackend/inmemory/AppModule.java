@@ -6,6 +6,7 @@ import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.AppConfigDefault;
 import org.spincast.todobackend.inmemory.controllers.TodoController;
 import org.spincast.todobackend.inmemory.controllers.TodoControllerDefault;
+import org.spincast.todobackend.inmemory.models.validators.TodoValidator;
 import org.spincast.todobackend.inmemory.repositories.InMemoryTodoRepository;
 import org.spincast.todobackend.inmemory.repositories.TodoRepository;
 import org.spincast.todobackend.inmemory.services.TodoService;
@@ -44,6 +45,7 @@ public class AppModule extends SpincastGuiceModuleBase {
         bind(TodoController.class).to(TodoControllerDefault.class).in(Scopes.SINGLETON);
         bind(TodoService.class).to(TodoServiceDefault.class).in(Scopes.SINGLETON);
         bind(TodoRepository.class).to(InMemoryTodoRepository.class).in(Scopes.SINGLETON);
+        bind(TodoValidator.class).in(Scopes.SINGLETON);
 
         //==========================================
         // Binds the App itself.

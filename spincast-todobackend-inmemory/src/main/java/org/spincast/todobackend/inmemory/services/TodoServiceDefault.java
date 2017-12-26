@@ -30,7 +30,7 @@ public class TodoServiceDefault implements TodoService {
      */
     @Inject
     public TodoServiceDefault(TodoRepository todoRepository,
-                       TodoValidator todoValidator) {
+                              TodoValidator todoValidator) {
         this.todoRepository = todoRepository;
         this.todoValidator = todoValidator;
     }
@@ -61,7 +61,7 @@ public class TodoServiceDefault implements TodoService {
      */
     protected List<Todo> sortTodosByOrder(Collection<Todo> todos) {
 
-        if(todos == null) {
+        if (todos == null) {
             return null;
         }
 
@@ -101,13 +101,13 @@ public class TodoServiceDefault implements TodoService {
      */
     protected void validateTodo(Todo newTodo) {
 
-        ValidationSet validationResult = getTodoValidator().validate(newTodo);
+        ValidationSet validation = getTodoValidator().validate(newTodo);
 
-        if(!validationResult.isValid()) {
+        if (!validation.isValid()) {
 
             StringBuilder messageBuilder = new StringBuilder("The Todo to add is invalid.\nErrors:\n\n");
 
-            messageBuilder.append(validationResult.getMessagesFormatted(ValidationMessageFormatType.PLAIN_TEXT));
+            messageBuilder.append(validation.getMessagesFormatted(ValidationMessageFormatType.PLAIN_TEXT));
 
             throw new PublicExceptionDefault(messageBuilder.toString());
         }
@@ -127,19 +127,19 @@ public class TodoServiceDefault implements TodoService {
     @Override
     public Todo patchTodo(Todo todo, JsonObject jsonPatch) {
 
-        if(todo == null || jsonPatch == null) {
+        if (todo == null || jsonPatch == null) {
             return todo;
         }
 
-        if(jsonPatch.isElementExists("title")) {
+        if (jsonPatch.isElementExists("title")) {
             todo.setTitle(jsonPatch.getString("title"));
         }
 
-        if(jsonPatch.isElementExists("completed")) {
+        if (jsonPatch.isElementExists("completed")) {
             todo.setCompleted(jsonPatch.getBoolean("completed"));
         }
 
-        if(jsonPatch.isElementExists("order")) {
+        if (jsonPatch.isElementExists("order")) {
             todo.setOrder(jsonPatch.getInteger("order"));
         }
 
