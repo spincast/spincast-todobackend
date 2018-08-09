@@ -3,7 +3,7 @@ In memory implementation of the [todobackend.com](http://todobackend.com) specs 
 
 ## How to run ##
 
-- Make sure you have a JDK 7+ installed
+- Make sure you have a JDK 8+ installed
 - Make sure you have Maven installed
 - Clone/Download the project
 - *mvn clean package*
