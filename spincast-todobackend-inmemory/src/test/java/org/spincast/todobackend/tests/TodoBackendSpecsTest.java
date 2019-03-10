@@ -29,7 +29,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     //==========================================
     @Test
     public void t01() throws Exception {
-        HttpResponse response = GET("/").send();
+        HttpResponse response = GET("/", false, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
     }
 
@@ -41,9 +41,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     public void t02() throws Exception {
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "a todo");
+        jsonObject.set("title", "a todo");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
     }
 
@@ -53,7 +53,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     @Test
     public void t03() throws Exception {
 
-        HttpResponse response = DELETE("/").send();
+        HttpResponse response = DELETE("/", false, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
     }
 
@@ -64,10 +64,10 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     @Test
     public void t04() throws Exception {
 
-        HttpResponse response = DELETE("/").send();
+        HttpResponse response = DELETE("/", false, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
-        response = GET("/").send();
+        response = GET("/", false, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         assertEquals(ContentTypeDefaults.JSON.getMainVariationWithUtf8Charset(), response.getContentType());
@@ -92,9 +92,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "walk the dog");
+        jsonObject.set("title", "walk the dog");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         JsonArray allTodos = getAllTodos();
@@ -111,9 +111,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "blah");
+        jsonObject.set("title", "blah");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -130,9 +130,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "blah");
+        jsonObject.set("title", "blah");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -149,9 +149,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "my todo");
+        jsonObject.set("title", "my todo");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -159,7 +159,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         String url = jsonObject.getString("url");
 
-        response = GET(url, true).send();
+        response = GET(url, true, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -181,22 +181,22 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "todo the first");
+        jsonObject.set("title", "todo the first");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = getJsonManager().create();
-        jsonObject.put("title", "todo the second");
+        jsonObject.set("title", "todo the second");
 
-        response = POST("/").setEntityJson(jsonObject).send();
+        response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         JsonArray allTodos = getAllTodos();
         assertNotNull(allTodos);
         assertEquals(2, allTodos.size());
 
-        response = GET(allTodos.getJsonObject(0).getString("url"), true).send();
+        response = GET(allTodos.getJsonObject(0).getString("url"), true, false).send();
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
         assertNotNull(jsonObject);
@@ -213,9 +213,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "initial title");
+        jsonObject.set("title", "initial title");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -224,9 +224,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         String url = jsonObject.getString("url");
 
         jsonObject = getJsonManager().create();
-        jsonObject.put("title", "bathe the cat");
+        jsonObject.set("title", "bathe the cat");
 
-        response = PATCH(url, true).setEntityJson(jsonObject).send();
+        response = PATCH(url, true, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -244,9 +244,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "blah");
+        jsonObject.set("title", "blah");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -255,9 +255,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         String url = jsonObject.getString("url");
 
         jsonObject = getJsonManager().create();
-        jsonObject.put("completed", true);
+        jsonObject.set("completed", true);
 
-        response = PATCH(url, true).setEntityJson(jsonObject).send();
+        response = PATCH(url, true, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -275,9 +275,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "blah");
+        jsonObject.set("title", "blah");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -286,13 +286,13 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         String url = jsonObject.getString("url");
 
         jsonObject = getJsonManager().create();
-        jsonObject.put("title", "changed title");
-        jsonObject.put("completed", true);
+        jsonObject.set("title", "changed title");
+        jsonObject.set("completed", true);
 
-        response = PATCH(url, true).setEntityJson(jsonObject).send();
+        response = PATCH(url, true, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
-        response = GET(url, true).send();
+        response = GET(url, true, false).send();
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
         assertNotNull(jsonObject);
@@ -315,9 +315,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         deleteAllTodos();
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "blah");
+        jsonObject.set("title", "blah");
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -325,7 +325,7 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
 
         String url = jsonObject.getString("url");
 
-        response = DELETE(url, true).send();
+        response = DELETE(url, true, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         JsonArray allTodos = getAllTodos();
@@ -339,10 +339,10 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     public void t14() throws Exception {
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("title", "blah");
-        jsonObject.put("order", 523);
+        jsonObject.set("title", "blah");
+        jsonObject.set("order", 523);
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -357,9 +357,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     public void t15() throws Exception {
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("order", 10);
+        jsonObject.set("order", 10);
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -368,9 +368,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         String url = jsonObject.getString("url");
 
         jsonObject = getJsonManager().create();
-        jsonObject.put("order", 95);
+        jsonObject.set("order", 95);
 
-        response = PATCH(url, true).setEntityJson(jsonObject).send();
+        response = PATCH(url, true, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -385,9 +385,9 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
     public void t16() throws Exception {
 
         JsonObject jsonObject = getJsonManager().create();
-        jsonObject.put("order", 10);
+        jsonObject.set("order", 10);
 
-        HttpResponse response = POST("/").setEntityJson(jsonObject).send();
+        HttpResponse response = POST("/", false, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
@@ -396,14 +396,14 @@ public class TodoBackendSpecsTest extends AppIntegrationTestBase {
         String url = jsonObject.getString("url");
 
         jsonObject = getJsonManager().create();
-        jsonObject.put("order", 95);
+        jsonObject.set("order", 95);
 
-        response = PATCH(url, true).setEntityJson(jsonObject).send();
+        response = PATCH(url, true, false).setJsonStringBody(jsonObject).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
         url = jsonObject.getString("url");
-        response = GET(url, true).send();
+        response = GET(url, true, false).send();
 
         jsonObject = this.jsonManager.fromString(response.getContentAsString());
         assertNotNull(jsonObject);

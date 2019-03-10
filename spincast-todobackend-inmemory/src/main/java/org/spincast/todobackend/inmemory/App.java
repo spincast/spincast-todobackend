@@ -79,13 +79,13 @@ public class App {
         //==========================================
         getRouter().cors();
 
-        getRouter().GET("/").save(getTodoController()::getTodosHandler);
-        getRouter().POST("/").save(getTodoController()::addTodoHandler);
-        getRouter().DELETE("/").save(getTodoController()::deleteTodosHandler);
+        getRouter().GET("/").handle(getTodoController()::getTodosHandler);
+        getRouter().POST("/").handle(getTodoController()::addTodoHandler);
+        getRouter().DELETE("/").handle(getTodoController()::deleteTodosHandler);
 
-        getRouter().GET("/${todoId:<N>}").save(getTodoController()::getTodoHandler);
-        getRouter().PATCH("/${todoId:<N>}").save(getTodoController()::patchTodoHandler);
-        getRouter().DELETE("/${todoId:<N>}").save(getTodoController()::deleteTodoHandler);
+        getRouter().GET("/${todoId:<N>}").handle(getTodoController()::getTodoHandler);
+        getRouter().PATCH("/${todoId:<N>}").handle(getTodoController()::patchTodoHandler);
+        getRouter().DELETE("/${todoId:<N>}").handle(getTodoController()::deleteTodoHandler);
     }
 
 }

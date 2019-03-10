@@ -4,16 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.spincast.core.config.SpincastConfig;
+import org.spincast.core.guice.TestingMode;
 import org.spincast.core.json.JsonArray;
 import org.spincast.core.json.JsonManager;
 import org.spincast.core.utils.ContentTypeDefaults;
 import org.spincast.core.utils.SpincastStatics;
-import org.spincast.defaults.testing.AppBasedDefaultContextTypesTestingBase;
 import org.spincast.plugins.config.SpincastConfigPluginConfig;
 import org.spincast.plugins.httpclient.HttpResponse;
 import org.spincast.shaded.org.apache.http.HttpStatus;
 import org.spincast.testing.core.AppTestingConfigs;
-import org.spincast.testing.core.utils.SpincastTestUtils;
+import org.spincast.testing.core.utils.SpincastTestingUtils;
+import org.spincast.testing.defaults.AppBasedDefaultContextTypesTestingBase;
 import org.spincast.todobackend.inmemory.App;
 import org.spincast.todobackend.inmemory.config.AppConfig;
 import org.spincast.todobackend.inmemory.config.AppConfigDefault;
@@ -21,7 +22,7 @@ import org.spincast.todobackend.inmemory.config.AppConfigDefault;
 import com.google.inject.Inject;
 
 /**
- * Integration test base class specifically made for 
+ * Integration test base class specifically made for
  * our application.
  */
 public abstract class AppIntegrationTestBase extends AppBasedDefaultContextTypesTestingBase {
@@ -30,7 +31,7 @@ public abstract class AppIntegrationTestBase extends AppBasedDefaultContextTypes
     protected JsonManager jsonManager;
 
     @Override
-    protected void startApp() {
+    protected void callAppMainMethod() {
         App.main(getMainArgs());
     }
 
@@ -76,15 +77,16 @@ public abstract class AppIntegrationTestBase extends AppBasedDefaultContextTypes
         private int serverPort = -1;
 
         @Inject
-        public AppTestingConfig(SpincastConfigPluginConfig spincastConfigPluginConfig) {
-            super(spincastConfigPluginConfig);
+        public AppTestingConfig(SpincastConfigPluginConfig spincastConfigPluginConfig,
+                                @TestingMode boolean testingMode) {
+            super(spincastConfigPluginConfig, testingMode);
         }
 
         /**
-         * We do not run in "debug" mode.
+         * We do not run in "development" mode.
          */
         @Override
-        public boolean isDebugEnabled() {
+        public boolean isDevelopmentMode() {
             return false;
         }
 
@@ -105,7 +107,7 @@ public abstract class AppIntegrationTestBase extends AppBasedDefaultContextTypes
                 // We reserve 44419 for the default configuration.
                 //==========================================
                 do {
-                    this.serverPort = SpincastTestUtils.findFreePort();
+                    this.serverPort = SpincastTestingUtils.findFreePort();
                 } while (this.serverPort == 44419);
             }
             return this.serverPort;
@@ -145,7 +147,7 @@ public abstract class AppIntegrationTestBase extends AppBasedDefaultContextTypes
 
     protected void deleteAllTodos() throws Exception {
 
-        HttpResponse response = DELETE("/").send();
+        HttpResponse response = DELETE("/", false, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         JsonArray jsonArray = getAllTodos();
@@ -154,7 +156,7 @@ public abstract class AppIntegrationTestBase extends AppBasedDefaultContextTypes
 
     protected JsonArray getAllTodos() throws Exception {
 
-        HttpResponse response = GET("/").send();
+        HttpResponse response = GET("/", false, false).send();
         assertEquals(HttpStatus.SC_OK, response.getStatus());
 
         assertEquals(ContentTypeDefaults.JSON.getMainVariationWithUtf8Charset(), response.getContentType());

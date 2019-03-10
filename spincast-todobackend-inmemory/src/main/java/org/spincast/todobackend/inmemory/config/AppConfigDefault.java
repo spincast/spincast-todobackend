@@ -2,6 +2,7 @@ package org.spincast.todobackend.inmemory.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spincast.core.guice.TestingMode;
 import org.spincast.plugins.config.SpincastConfigDefault;
 import org.spincast.plugins.config.SpincastConfigPluginConfig;
 
@@ -17,8 +18,9 @@ import com.google.inject.Inject;
 public class AppConfigDefault extends SpincastConfigDefault implements AppConfig {
 
     @Inject
-    protected AppConfigDefault(SpincastConfigPluginConfig spincastConfigPluginConfig) {
-        super(spincastConfigPluginConfig);
+    protected AppConfigDefault(SpincastConfigPluginConfig spincastConfigPluginConfig,
+                               @TestingMode boolean testingMode) {
+        super(spincastConfigPluginConfig, testingMode);
     }
 
     protected final Logger logger = LoggerFactory.getLogger(AppConfigDefault.class);

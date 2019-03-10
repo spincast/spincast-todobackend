@@ -131,15 +131,15 @@ public class TodoServiceDefault implements TodoService {
             return todo;
         }
 
-        if (jsonPatch.isElementExists("title")) {
+        if (jsonPatch.contains("title")) {
             todo.setTitle(jsonPatch.getString("title"));
         }
 
-        if (jsonPatch.isElementExists("completed")) {
+        if (jsonPatch.contains("completed")) {
             todo.setCompleted(jsonPatch.getBoolean("completed"));
         }
 
-        if (jsonPatch.isElementExists("order")) {
+        if (jsonPatch.contains("order")) {
             todo.setOrder(jsonPatch.getInteger("order"));
         }
 
